@@ -3,7 +3,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const Shimmer = () => {
   return (
-    <div className="flex flex-wrap gap-4 py-2 m-auto">
+    <div className="justify-center flex flex-wrap gap-4 py-2 m-auto ">
+      <ShimmerCard />
+      <ShimmerCard />
       <ShimmerCard />
       <ShimmerCard />
       <ShimmerCard />
@@ -15,22 +17,13 @@ const Shimmer = () => {
     </div>
   );
 };
-
 const ShimmerCard = () => {
   return (
-    <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-      <div className="bg-white rounded-lg shadow-lg">
-        <Skeleton height={200} />
-        <div className="p-4">
-          <Skeleton height={20} width={150} />
-          <Skeleton height={16} width={200} />
-          <Skeleton height={16} width={100} />
-          <div className="flex items-center justify-between mt-4">
-            <Skeleton height={20} width={80} />
-            <Skeleton height={24} width={80} />
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-col gap-1 m-auto md:m-0">
+      <Skeleton width={"250px"} height={"155px"} />
+      <Skeleton width={"250px"} height={"25px"} />
+      <Skeleton width={"250px"} height={"25px"} />
+      <Skeleton width={"250px"} height={"25px"} />
     </div>
   );
 };

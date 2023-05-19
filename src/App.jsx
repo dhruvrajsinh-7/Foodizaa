@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/header/Navbar";
 import Footer from "./Components/Footer/Footer";
+import Home from "./Components/pages/Home";
 function App() {
   return (
-    <div className="flex flex-col h-screen justify-between font-serif">
-      <Router>
-        <Navbar /> {/* <Route exact path="/" component={Body} /> */}
-        {/* Add more routes as needed */}
-        = <Footer />
-      </Router>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
