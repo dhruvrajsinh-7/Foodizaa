@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 // import { filterData } from "../Utils/Helper";
 import Restuarantcard from "../Restuarantcard";
 
-const Home = () => {
+const Home = ({ user }) => {
   const [allRestaurants, setAllRestaurants] = useState([]);
 
   const [filteredRes, setFilteredRes] = useState([]);
@@ -13,17 +15,26 @@ const Home = () => {
   useEffect(() => {
     getAllRestaurants();
   }, []);
+
   async function getAllRestaurants() {
-    const data = await fetch(
-      "https://corsanywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
+    try {
+      const response = await axios.get(
+        "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&page_type=DESKTOP_WEB_LISTING"
+      );
 
-    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+      const json = response.data;
 
-    setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
-    console.log(json?.data?.cards[2]?.data?.data?.cards);
+      const allRestaurants = json?.data?.cards[2]?.data?.data?.cards;
+
+      setAllRestaurants(allRestaurants);
+      setFilteredRes(allRestaurants);
+
+      console.log(allRestaurants);
+    } catch (error) {
+      console.error(error);
+    }
   }
+
   if (!allRestaurants) return null;
   {
     /*hero*/
@@ -35,8 +46,18 @@ const Home = () => {
   return allRestaurants?.length == 0 ? (
     <Shimmer />
   ) : (
-    <div className="flex flex-col items-center justify-center">
-      <Restuarantcard />
+    <div className="flex flex-wrap items-center py-4 justify-center gap-4">
+      {filteredRes?.length == 0 ? (
+        <Shimmer />
+      ) : (
+        filteredRes?.map((item) => {
+          return (
+            <Link to={"/restaurant/" + item.data.id} key={item?.data?.id}>
+              <Restuarantcard {...item?.data} user={user} />
+            </Link>
+          );
+        })
+      )}
     </div>
   );
 };
