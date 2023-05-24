@@ -11,7 +11,6 @@ const RestaurantCard = ({
   costForTwoString,
   avgRating,
   offerPercentage,
-  aggregatedDiscountInfo,
 }) => {
   return (
     <div className="md:w-64 md:h-80 shadow-md md:shadow-none py-4 px-4 md:py-2 hover:shadow-lg rounded flex flex-col gap-1 text-sm text-[#535665] transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
