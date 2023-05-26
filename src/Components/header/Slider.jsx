@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-sea-green.min.css";
-
+import React, { useEffect, useRef, useState } from "react";
 const Slider = () => {
   const splideRef = useRef(null);
   const [loading, setLoading] = useState(true);
@@ -11,11 +10,9 @@ const Slider = () => {
       setTimeout(() => {
         setLoading(false);
         new Splide(splideRef.current, {
-          perPage: 1,
+          fixedWidth: "10rem",
+          fixedHeight: "8rem",
           gap: "1rem",
-          autoWidth: true,
-          pagination: false,
-          arrows: true,
         }).mount();
       }, 2000);
     }
@@ -85,17 +82,14 @@ const Slider = () => {
   };
 
   return (
-    <div className="bg-[#282c3f] mb-10">
-      <div className="px-4 md:px-10 lg:px-20">
+    <div className="bg-[#282c3f]  mb-10">
+      <div className="px-4 md:px-10 lg:px-20" ref={splideRef}>
         <Splide
           options={{
-            perPage: 1,
-            gap: "1rem",
-            autoWidth: true,
-            pagination: true,
-            arrows: true,
+            fixedWidth: "12rem",
+            fixedHeight: "12rem",
+            gap: "4rem",
           }}
-          ref={splideRef}
         >
           {renderSlides()}
         </Splide>
