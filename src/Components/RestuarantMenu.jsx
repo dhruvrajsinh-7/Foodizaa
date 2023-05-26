@@ -6,12 +6,15 @@ import { useDispatch } from "react-redux";
 import React from "react";
 import { faStar, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { addItem } from "../Utils/CartSlice";
 const RestaurantMenu = () => {
   const resId = useParams();
   const { id } = resId;
   const menu = useRestro(id);
-
+  const dispatch = useDispatch();
+  function addItemFunc(item) {
+    dispatch(addItem(item));
+  }
   return !menu ? (
     <ShimmerMenu />
   ) : (
@@ -141,7 +144,10 @@ const RestaurantMenu = () => {
                     alt=""
                     className="w-32 h-20 rounded self-center object-cover"
                   />
-                  <button className="absolute bottom-[-8px] bg-white shadow-md border self-center text-xs py-1 px-4 font-medium rounded  active:scale-90 hover:bg-blue-100 transition-all duration-300 ease-in-out">
+                  <button
+                    className="absolute bottom-[-8px] bg-white shadow-md border self-center text-xs py-1 px-4 font-medium rounded  active:scale-90 hover:bg-blue-100 transition-all duration-300 ease-in-out"
+                    onClick={() => addItemFunc(item)}
+                  >
                     ADD TO CART
                   </button>
                 </div>

@@ -11,9 +11,11 @@ const Slider = () => {
       setTimeout(() => {
         setLoading(false);
         new Splide(splideRef.current, {
-          fixedWidth: "10rem",
-          fixedHeight: "8rem",
+          perPage: 1,
           gap: "1rem",
+          autoWidth: true,
+          pagination: false,
+          arrows: true,
         }).mount();
       }, 2000);
     }
@@ -83,14 +85,17 @@ const Slider = () => {
   };
 
   return (
-    <div className="bg-[#282c3f] h-66 mb-10">
-      <div className="mb-10 px-40" ref={splideRef}>
+    <div className="bg-[#282c3f] mb-10">
+      <div className="px-4 md:px-10 lg:px-20">
         <Splide
           options={{
-            fixedWidth: "12rem",
-            fixedHeight: "12rem",
-            gap: "4rem",
+            perPage: 1,
+            gap: "1rem",
+            autoWidth: true,
+            pagination: true,
+            arrows: true,
           }}
+          ref={splideRef}
         >
           {renderSlides()}
         </Splide>
