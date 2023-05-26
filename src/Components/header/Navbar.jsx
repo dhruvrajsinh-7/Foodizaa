@@ -7,14 +7,18 @@ import {
   faSearch,
   faLifeRing,
   faTags,
+  faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Logo } from "../../assets";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isMenuIconToggle, setMenuIconToggle] = useState(false);
+
+  const cartItems = useSelector((store) => store.cart.items);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -22,7 +26,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-10  px-5 flex justify-between items-center h-22 bg-white  drop-shadow-md w-full">
+    <nav className="sticky top-0 z-10 px-5 flex justify-between items-center h-22 bg-white drop-shadow-md w-full">
       {/* Logo */}
       <div className="">
         <Link to="/">
@@ -39,24 +43,22 @@ function Navbar() {
           isMenuOpen ? "" : "hidden"
         } absolute top-14 right-0 px-5 py-10 bg-gray-700 h-screen flex flex-col md:flex md:space-y-0 md:relative md:top-0 md:right-0 md:p-0 md:flex-row md:h-full md:flex-grow md:justify-end md:items-center md:ml-10 md:bg-inherit`}
       >
-        <form className="mb-10 md:mb-0 md:pr-8 flex items-center" action="">
-          <input
-            className="w-72 py-1 pl-3 pr-10 rounded-full  text-black font-semibold focus:outline-0"
-            type="text"
-            placeholder="Search Restaurants.."
-            name="search"
-          />
-          <button className="-ml-8 border-6 text-orange-700" type="submit">
-            <FontAwesomeIcon icon={faSearch} className="fa-solid" />
-          </button>
-        </form>
+        <div className="flex flex-col gap-10 text-black space-y-3 md:flex-row md:items-start md:space-y-0 md:space-x-3">
+          <ul className="flex py-9 gap-16">
+            <li className="text-black" href="#">
+              <Link
+                to="/"
+                className="py-2 bg-white rounded-2xl hover:text-orange-400"
+              >
+                <FontAwesomeIcon icon={faHome} />
+                <span className="hidden ml-2 font-proxima md:inline">Home</span>
+              </Link>
+            </li>
 
-        <div className=" flex flex-col gap-10 text-black space-y-3 md:flex-row md:items-start md:space-y-0 md:space-x-3">
-          <ul className="flex py-9  gap-16">
             <li className="text-black" href="#">
               <Link
                 to="/offers"
-                className="py-2  bg-white rounded-2xl hover:text-orange-400"
+                className="py-2 bg-white rounded-2xl hover:text-orange-400"
               >
                 <FontAwesomeIcon icon={faTags} />
                 <span className="hidden ml-2 font-proxima md:inline">
@@ -67,7 +69,7 @@ function Navbar() {
             <li className="hover:text-black" href="#">
               <Link
                 to="/help"
-                className="py-2  bg-white rounded-2xl hover:text-orange-400"
+                className="py-2 bg-white rounded-2xl hover:text-orange-400"
               >
                 <FontAwesomeIcon icon={faLifeRing} />
                 <span className="hidden ml-2 font-proxima md:inline">help</span>
@@ -80,7 +82,6 @@ function Navbar() {
               >
                 <FontAwesomeIcon icon={faUser} />
                 <span className="hidden ml-2 font-proxima md:inline">
-                  {" "}
                   Sign in
                 </span>
               </Link>
@@ -89,10 +90,13 @@ function Navbar() {
             <li className="hover:text-black" href="#">
               <Link
                 to="/cart"
-                className="py-2  bg-white rounded-2xl hover:text-orange-400"
+                className="py-2 bg-white px-2 mb-2 border border-black hover:text-orange-400 "
               >
-                <FontAwesomeIcon icon={faCartPlus} />
-                <span className="hidden ml-2 font-proxima md:inline">Cart</span>
+                <FontAwesomeIcon icon={faCartPlus} className=" p2 mr-1" />
+                {cartItems.length > 0 && (
+                  <span className="px-1 mx-1 text-sm">{cartItems.length}</span>
+                )}
+                <span className="hidden font-proxima md:inline">Cart</span>
               </Link>
             </li>
           </ul>
