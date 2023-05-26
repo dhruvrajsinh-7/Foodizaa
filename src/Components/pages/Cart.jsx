@@ -2,9 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IMG_CDN } from "../../Config";
 import { clearItem } from "../../Utils/CartSlice";
-import { cart } from "../../assets";
 import { Link } from "react-router-dom";
-
+import { cart } from "../../assets/index.js";
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
